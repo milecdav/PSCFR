@@ -160,7 +160,7 @@ class LeducHoldemState(State):
 
     def get_state_string(self):
         return "Player: " + str(self.player_on_turn) + " Deck: " + str(self.get_current_deck()) + " Hands: " + str(self.get_private_cards()) + " Pot: " + str(self.pot) + " Public card: " + CARD_TO_STRING[
-            self.public_card] + " Pot contribution: " + str(self.pot_contributions) + " Public sequence: " + str(self.public_sequence)
+            self.public_card] + " Pot contribution: " + str(self.pot_contributions) + " Public sequence: " + str(self.public_sequence) + (" Value: " + str(self.value) if self.is_terminal() else "")
 
     def is_terminal(self):
         return self.terminal

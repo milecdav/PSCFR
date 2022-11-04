@@ -70,7 +70,7 @@ class RepeatedRPSState(State):
         return tuple(map(tuple, self.actions_played[:self.round - (1 if self.terminal else 0)])), self.round
 
     def get_state_string(self):
-        return f"Repeated RPS state - Round: {self.round} Actions played: {self.actions_played}"
+        return f"Repeated RPS state - Round: {self.round} Actions played: {self.actions_played}" + (" Value: " + str(self.value) if self.is_terminal() else "")
 
     def is_terminal(self):
         return self.terminal

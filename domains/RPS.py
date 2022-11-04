@@ -61,7 +61,7 @@ class RPSState(State):
         return self.terminal,
 
     def get_state_string(self):
-        return "Terminal" if self.terminal else "Root"
+        return "Terminal" if self.terminal else "Root" + (" Value: " + str(self.value) if self.is_terminal() else "")
 
     def is_terminal(self):
         return self.terminal
