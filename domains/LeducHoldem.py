@@ -51,9 +51,9 @@ class LeducHoldemState(State):
                     for card_two in self.deck:
                         if card_one != card_two:
                             chance_actions.append(card_one * 6 + card_two)
-            return [[NO_ACTION], [NO_ACTION], list(zip(chance_actions, np.full(len(chance_actions), fill_value=1. / len(chance_actions), dtype=float)))]
+            return [[NO_ACTION], [NO_ACTION], chance_actions, np.full(len(chance_actions), fill_value=1. / len(chance_actions), dtype=float)]
         else:
-            actions = [[], [], [(NO_ACTION, 1)]]
+            actions = [[], [], [NO_ACTION], [1]]
             if self.call_needed:
                 actions[opponent(self.player_on_turn)] = [NO_ACTION]
                 if self.bets_this_round == 2:
@@ -82,7 +82,7 @@ class LeducHoldemState(State):
         for action, possible_actions in zip(actions, self.get_possible_actions()):
             assert action in possible_actions, "Invalid action selected"
         if self.player_on_turn == CHANCE:
-            chance_action = actions[2][0]
+            chance_action = actions[2]
             if self.private_cards_dealt:
                 self.public_card = chance_action
                 self.deck = np.delete(self.deck, np.where(self.deck == chance_action))

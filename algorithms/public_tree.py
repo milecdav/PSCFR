@@ -113,8 +113,8 @@ class PublicTree:
             new_public_node = dummy_public_node
         for i, action_one in enumerate(state.get_possible_actions()[0]):
             for j, action_two in enumerate(state.get_possible_actions()[1]):
-                for chance_action, probability in state.get_possible_actions()[2]:
-                    self.build_tree_steps(new_public_node, [new_parents[0][i], new_parents[1][j]], state.get_child([action_one, action_two, (chance_action, probability)]), chance_reach * probability)
+                for chance_action, probability in zip(state.get_possible_actions()[2], state.get_possible_actions()[3]):
+                    self.build_tree_steps(new_public_node, [new_parents[0][i], new_parents[1][j]], state.get_child([action_one, action_two, chance_action]), chance_reach * probability)
 
     def build_terminal_matrices(self):
         for public_state in self.terminal_states:

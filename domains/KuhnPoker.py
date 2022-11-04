@@ -47,14 +47,14 @@ class KuhnPokerState(State):
                     for card_two in self.deck:
                         if card_one != card_two:
                             chance_actions.append(card_one * 3 + card_two)
-            return [[NO_ACTION], [NO_ACTION], list(zip(chance_actions, np.full(len(chance_actions), fill_value=1. / len(chance_actions), dtype=float)))]
+            return [[NO_ACTION], [NO_ACTION], chance_actions, np.full(len(chance_actions), fill_value=1. / len(chance_actions), dtype=float)]
         else:
-            actions = [[], [], [(NO_ACTION, 1)]]
+            actions = [[], [], [NO_ACTION], [1]]
             if self.call_needed:
-                actions[opponent(self.player_on_turn)] = [(NO_ACTION, 1)]
+                actions[opponent(self.player_on_turn)] = [NO_ACTION]
                 actions[self.player_on_turn] = [FOLD, CALL]
             else:
-                actions[opponent(self.player_on_turn)] = [(NO_ACTION, 1)]
+                actions[opponent(self.player_on_turn)] = [NO_ACTION]
                 actions[self.player_on_turn] = [CALL, BET]
             return actions
 
@@ -77,7 +77,7 @@ class KuhnPokerState(State):
         for action, possible_actions in zip(actions, self.get_possible_actions()):
             assert action in possible_actions, "Invalid action selected"
         if self.player_on_turn == CHANCE:
-            chance_action = actions[2][0]
+            chance_action = actions[2]
             cards = np.asarray([int(chance_action / 3), chance_action % 3])
             self.private_cards = cards
             self.deck = np.delete(self.deck, np.where(self.deck == cards[0]))

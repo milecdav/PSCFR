@@ -28,7 +28,7 @@ class TickTacToeState(State):
         if self.terminal:
             return [[], [], []]
         else:
-            actions = [[], [], [(NO_ACTION, 1)]]
+            actions = [[], [], [NO_ACTION], [1]]
             actions[opponent(self.active_player)].append(NO_ACTION)
             actions[self.active_player] = list(np.where(self.board.reshape(-1) == EMPTY)[0])
             return actions

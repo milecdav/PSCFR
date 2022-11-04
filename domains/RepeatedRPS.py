@@ -34,7 +34,7 @@ class RepeatedRPSState(State):
         if self.terminal:
             return [[], [], []]
         else:
-            return [[ROCK, PAPER, SCISSORS], [ROCK, PAPER, SCISSORS], [(NO_ACTION, 1)]]
+            return [[ROCK, PAPER, SCISSORS], [ROCK, PAPER, SCISSORS], [NO_ACTION], [1]]
 
     def get_possible_joint_actions(self):
         actions = self.get_possible_actions()
