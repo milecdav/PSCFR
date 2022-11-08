@@ -1,5 +1,5 @@
 import unittest
-from domains import KuhnPoker, LeducHoldem, RepeatedRPS, RPS
+from domains import KuhnPoker, LeducHoldem, RepeatedRPS, RPS, SmallDrawPoker
 from algorithms.cfr import CFR
 
 
@@ -31,6 +31,10 @@ class TestTreeSizes(unittest.TestCase):
     def test_rps(self):
         game_value = get_cfr_value(RPS.RPS(bias=2))
         self.assertAlmostEqual(game_value, 0, 3)
+
+    def test_small_draw_poker(self):
+        game_value = get_cfr_value(SmallDrawPoker.SmallDrawPoker())
+        self.assertAlmostEqual(game_value, -0.04444444444444445, 3)
 
 
 if __name__ == '__main__':

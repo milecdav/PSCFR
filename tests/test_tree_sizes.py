@@ -1,6 +1,6 @@
 import unittest
 from algorithms.public_tree import PublicTree
-from domains import KuhnPoker, LeducHoldem, RepeatedRPS, RPS, TickTacToe
+from domains import KuhnPoker, LeducHoldem, RepeatedRPS, RPS, TickTacToe, SmallDrawPoker
 from algorithms.infoset_tree import DECISION_NODE, TERMINAL_NODE, HELPER_NODE, OBSERVATION_NODE
 
 
@@ -61,6 +61,13 @@ class TestTreeSizes(unittest.TestCase):
         self.assertEqual(observation_nodes, 1)
         self.assertEqual(helper_nodes, 3)
         self.assertEqual(terminal_nodes, 3)
+
+    def test_small_draw_poker(self):
+        decision_nodes, observation_nodes, helper_nodes, terminal_nodes = infoset_count(SmallDrawPoker.SmallDrawPoker())
+        self.assertEqual(decision_nodes, 1128)
+        self.assertEqual(observation_nodes, 1490)
+        self.assertEqual(helper_nodes, 0)
+        self.assertEqual(terminal_nodes, 3264)
 
     def test_tick_tac_toe(self):
         decision_nodes, observation_nodes, helper_nodes, terminal_nodes = infoset_count(TickTacToe.TickTacToe(2))
