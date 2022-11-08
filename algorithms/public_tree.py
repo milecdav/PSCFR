@@ -118,7 +118,7 @@ class PublicTree:
 
     def build_terminal_matrices(self):
         for public_state in self.terminal_states:
-            terminal_matrix = np.zeros((len(public_state.infoset_nodes[0]), len(public_state.infoset_nodes[0])))
+            terminal_matrix = np.zeros((len(public_state.infoset_nodes[0]), len(public_state.infoset_nodes[1])))
             for i, player_one_node in enumerate(public_state.infoset_nodes[0]):
                 infoset_string_one = player_one_node.get_infoset()
                 for j, player_two_node in enumerate(public_state.infoset_nodes[1]):
