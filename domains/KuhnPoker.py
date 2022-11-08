@@ -75,7 +75,7 @@ class KuhnPokerState(State):
     def apply_actions(self, actions):
         assert not self.terminal
         for action, possible_actions in zip(actions, self.get_possible_actions()):
-            assert action in possible_actions, "Invalid action selected"
+            assert action in possible_actions, f"Invalid action selected {action}. Possible actions {possible_actions}."
         if self.player_on_turn == CHANCE:
             chance_action = actions[2]
             cards = np.asarray([int(chance_action / 3), chance_action % 3])

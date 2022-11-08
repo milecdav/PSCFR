@@ -53,7 +53,7 @@ class RepeatedRPSState(State):
     def apply_actions(self, actions):
         assert not self.terminal
         for action, possible_actions in zip(actions, self.get_possible_actions()):
-            assert action in possible_actions, "Invalid action selected"
+            assert action in possible_actions,  f"Invalid action selected {action}. Possible actions {possible_actions}."
         self.actions_played[self.round] = actions[:2]
         self.round += 1
         if self.round == self.rounds:

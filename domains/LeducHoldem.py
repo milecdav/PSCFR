@@ -80,7 +80,7 @@ class LeducHoldemState(State):
     def apply_actions(self, actions):
         assert not self.terminal
         for action, possible_actions in zip(actions, self.get_possible_actions()):
-            assert action in possible_actions, "Invalid action selected"
+            assert action in possible_actions,  f"Invalid action selected {action}. Possible actions {possible_actions}."
         if self.player_on_turn == CHANCE:
             chance_action = actions[2]
             if self.private_cards_dealt:

@@ -64,7 +64,7 @@ class TickTacToeState(State):
     def apply_actions(self, actions):
         assert not self.terminal
         for action, possible_actions in zip(actions, self.get_possible_actions()):
-            assert action in possible_actions, "Invalid action selected"
+            assert action in possible_actions,  f"Invalid action selected {action}. Possible actions {possible_actions}."
         self.board.reshape(-1)[actions[self.active_player]] = PLAYER_PRESENT[self.active_player]
         self.action_history.append(actions[self.active_player])
         if self.player_won():

@@ -49,7 +49,7 @@ class RPSState(State):
     def apply_actions(self, actions):
         assert not self.terminal
         for action, possible_actions in zip(actions, self.get_possible_actions()):
-            assert action in possible_actions, "Invalid action selected"
+            assert action in possible_actions,  f"Invalid action selected {action}. Possible actions {possible_actions}."
         self.actions_played = actions[:2]
         self.terminal = True
         self.value = self.game.reward_matrix[self.actions_played[0]][self.actions_played[1]]
