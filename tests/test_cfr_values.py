@@ -15,7 +15,7 @@ def get_cfr_value(domain):
     return cfr.root_cfvs()[0]
 
 
-class TestTreeSizes(unittest.TestCase):
+class TestCfrValues(unittest.TestCase):
     def test_kuhn_poker(self):
         game_value = get_cfr_value(KuhnPoker.KuhnPoker())
         self.assertAlmostEqual(game_value, -1. / 18, 3)

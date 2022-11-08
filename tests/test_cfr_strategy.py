@@ -11,7 +11,7 @@ def get_cfr_strategy(domain):
     return cfr.cumulative_strategy
 
 
-class TestTreeSizes(unittest.TestCase):
+class TestCfrStrategy(unittest.TestCase):
     def test_repeated_rps(self):
         strategy = get_cfr_strategy(RepeatedRPS.RepeatedRPS(bias=2))
         for player in range(2):
