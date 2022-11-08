@@ -13,6 +13,8 @@ class GambitExporter:
         self.information_set_mapping = [{}, {}]
 
     def export(self, file_name):
+        self.chance_index = 0
+        self.terminal_index = 0
         with open(file_name, "w") as file:
             file.write("EFG 2 R \"My tree\" { \"Player 1\" \"Player 2\" }\n")
             self.save_node_to_file(self.game.get_initial_state(), 0, file, 0, [])
