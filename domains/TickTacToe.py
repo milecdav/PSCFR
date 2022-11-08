@@ -82,7 +82,7 @@ class TickTacToeState(State):
         return self.winner, tuple(map(tuple, self.board)), tuple(self.action_history)
 
     def get_state_string(self):
-        return f"Tick Tack Toe state - Board: {self.board} Active player: {self.active_player}" + (" Value: " + str(self.value) if self.is_terminal() else "")
+        return f"Tick Tack Toe state - Board: {[str(row) for row in self.board]} Active player: {self.active_player}" + (" Value: " + str(self.value) if self.is_terminal() else "")
 
     def is_terminal(self):
         return self.terminal
