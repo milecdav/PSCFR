@@ -2,9 +2,11 @@ from FOSG import FOSG, State
 from utils import CHANCE, NO_ACTION, NO_VALUE
 import numpy as np
 from itertools import product
+
+
 class Goofspiel(FOSG):
 
-    def __init__(self, num_cards = 3):
+    def __init__(self, num_cards=3):
         self.num_cards = num_cards
 
     def get_initial_state(self):
@@ -20,7 +22,7 @@ class GoofspielState(State):
 
         self.chances_order = []
         self.actions_played = [[], []]
-        
+
         self.winner = []
         self.tie_card = []
         self.points = [0, 0]
@@ -49,19 +51,13 @@ class GoofspielState(State):
             return True
         elif (player == 0 or player == 1) and not self.plays_chance and not self.terminal:
             return True
-            
+
         return False
 
     def apply_actions(self, actions):
         assert not self.terminal
-        print(actions)
-        # print(self.p1_cards)
-        # print(self.p2_cards)
-        # print(self.chance_cards)
-        # print(self.terminal)
         for action, possible_actions in zip(actions, self.get_possible_actions()):
-            # print(action)
-            assert action in possible_actions,  f"Invalid action selected {action}. Possible actions {possible_actions}."
+            assert action in possible_actions, f"Invalid action selected {action}. Possible actions {possible_actions}."
         if self.plays_chance:
             self.plays_chance = False
 
@@ -105,7 +101,6 @@ class GoofspielState(State):
                     self.value = -1
                 else:
                     self.value = 0
-
 
     def get_private_information(self, player: int):
         return tuple(self.actions_played[player]),
