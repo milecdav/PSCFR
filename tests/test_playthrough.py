@@ -1,5 +1,5 @@
 import unittest
-from domains import RepeatedRPS, RPS, SmallDrawPoker, KuhnPoker, LeducHoldem, TickTacToe
+from domains import RepeatedRPS, RPS, SmallDrawPoker, KuhnPoker, LeducHoldem, TickTacToe, Battleships
 from FOSG import FOSG
 from utils import NO_ACTION
 
@@ -400,6 +400,193 @@ class TestPlaythrough(unittest.TestCase):
 
         for actions, state_strings in zip(action_arrays, state_string_arrays):
             self.check_playthrough(TickTacToe.TickTacToe(), actions, state_strings)
+
+    def test_battleships_ship_size_one(self):
+        action_arrays = [
+            [
+                [0, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 1, NO_ACTION],
+                [0, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 3, NO_ACTION],
+                [3, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 2, NO_ACTION],
+                [2, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 0, NO_ACTION],
+            ],
+            [
+                [3, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 3, NO_ACTION],
+                [0, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 2, NO_ACTION],
+                [1, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 1, NO_ACTION],
+                [2, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 0, NO_ACTION],
+                [3, NO_ACTION, NO_ACTION]
+            ],
+            [
+                [0, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 3, NO_ACTION],
+                [3, NO_ACTION, NO_ACTION]
+            ]
+        ]
+
+        state_string_arrays = [
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[0], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[0], [1]] Actions: []",
+                "Battleships state - Player: 1 Ships: [[0], [1]] Actions: [0]",
+                "Battleships state - Player: 0 Ships: [[0], [1]] Actions: [0, 3]",
+                "Battleships state - Player: 1 Ships: [[0], [1]] Actions: [0, 3, 3]",
+                "Battleships state - Player: 0 Ships: [[0], [1]] Actions: [0, 3, 3, 2]",
+                "Battleships state - Player: 1 Ships: [[0], [1]] Actions: [0, 3, 3, 2, 2]",
+                "Battleships state - Terminal - Actions: [0, 3, 3, 2, 2, 0, -1] Value: -1",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[3], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[3], [3]] Actions: []",
+                "Battleships state - Player: 1 Ships: [[3], [3]] Actions: [0]",
+                "Battleships state - Player: 0 Ships: [[3], [3]] Actions: [0, 2]",
+                "Battleships state - Player: 1 Ships: [[3], [3]] Actions: [0, 2, 1]",
+                "Battleships state - Player: 0 Ships: [[3], [3]] Actions: [0, 2, 1, 1]",
+                "Battleships state - Player: 1 Ships: [[3], [3]] Actions: [0, 2, 1, 1, 2]",
+                "Battleships state - Player: 0 Ships: [[3], [3]] Actions: [0, 2, 1, 1, 2, 0]",
+                "Battleships state - Terminal - Actions: [0, 2, 1, 1, 2, 0, 3, -1] Value: 1",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[0], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[0], [3]] Actions: []",
+                "Battleships state - Terminal - Actions: [3, -1] Value: 1",
+            ]
+        ]
+
+        for actions, state_strings in zip(action_arrays, state_string_arrays):
+            self.check_playthrough(Battleships.Battleships(2, 2, 1), actions, state_strings)
+
+    def test_battleships_ship_size_two(self):
+        action_arrays = [
+            [
+                [0, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 10, NO_ACTION],
+                [0, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 3, NO_ACTION],
+                [3, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 2, NO_ACTION],
+                [2, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 0, NO_ACTION],
+            ],
+            [
+                [7, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 11, NO_ACTION],
+                [7, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 4, NO_ACTION],
+                [2, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 3, NO_ACTION],
+            ],
+            [
+                [3, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 5, NO_ACTION],
+                [4, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 7, NO_ACTION],
+                [5, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 5, NO_ACTION],
+                [8, NO_ACTION, NO_ACTION],
+            ],
+            [
+                [0, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 1, NO_ACTION],
+            ],
+            [
+                [2, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 3, NO_ACTION],
+            ],
+            [
+                [4, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 5, NO_ACTION],
+            ],
+            [
+                [6, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 7, NO_ACTION],
+            ],
+            [
+                [8, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 9, NO_ACTION],
+            ],
+            [
+                [10, NO_ACTION, NO_ACTION],
+                [NO_ACTION, 11, NO_ACTION],
+            ],
+
+        ]
+
+        state_string_arrays = [
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[0, 3], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[0, 3], [4, 5]] Actions: []",
+                "Battleships state - Player: 1 Ships: [[0, 3], [4, 5]] Actions: [0]",
+                "Battleships state - Player: 0 Ships: [[0], [4, 5]] Actions: [0, 3, -1]",
+                "Battleships state - Player: 1 Ships: [[0], [4, 5]] Actions: [0, 3, -1, 3]",
+                "Battleships state - Player: 0 Ships: [[0], [4, 5]] Actions: [0, 3, -1, 3, 2]",
+                "Battleships state - Player: 1 Ships: [[0], [4, 5]] Actions: [0, 3, -1, 3, 2, 2]",
+                "Battleships state - Terminal - Actions: [0, 3, -1, 3, 2, 2, 0, -1] Value: -1",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[3, 4], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[3, 4], [7, 8]] Actions: []",
+                "Battleships state - Player: 1 Ships: [[3, 4], [8]] Actions: [7, -1]",
+                "Battleships state - Player: 0 Ships: [[3], [8]] Actions: [7, -1, 4, -1]",
+                "Battleships state - Player: 1 Ships: [[3], [8]] Actions: [7, -1, 4, -1, 2]",
+                "Battleships state - Terminal - Actions: [7, -1, 4, -1, 2, 3, -1] Value: -1",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[3, 6], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[3, 6], [5, 8]] Actions: []",
+                "Battleships state - Player: 1 Ships: [[3, 6], [5, 8]] Actions: [4]",
+                "Battleships state - Player: 0 Ships: [[3, 6], [5, 8]] Actions: [4, 7]",
+                "Battleships state - Player: 1 Ships: [[3, 6], [8]] Actions: [4, 7, 5, -1]",
+                "Battleships state - Player: 0 Ships: [[3, 6], [8]] Actions: [4, 7, 5, -1, 5]",
+                "Battleships state - Terminal - Actions: [4, 7, 5, -1, 5, 8, -1] Value: 1",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[0, 3], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[0, 3], [1, 4]] Actions: []",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[2, 5], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[2, 5], [3, 6]] Actions: []",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[4, 7], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[4, 7], [5, 8]] Actions: []",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[0, 1], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[0, 1], [3, 4]] Actions: []",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[6, 7], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[6, 7], [1, 2]] Actions: []",
+            ],
+            [
+                "Battleships state - Player: 0 Ships: [[], []] Actions: []",
+                "Battleships state - Player: 1 Ships: [[4, 5], []] Actions: []",
+                "Battleships state - Player: 0 Ships: [[4, 5], [7, 8]] Actions: []",
+            ],
+        ]
+
+        for actions, state_strings in zip(action_arrays, state_string_arrays):
+            self.check_playthrough(Battleships.Battleships(3, 3, 2), actions, state_strings)
 
 
 if __name__ == '__main__':
